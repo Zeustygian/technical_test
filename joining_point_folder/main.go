@@ -27,6 +27,10 @@ func Compute_snd_nb(snd_string string, sum_snd int) int {
 }
 
 func ComputeJoinPoint(s1 int, s2 int) int {
+	if s1 >= 20000000 || s2 >= 20000000 || s1 <= 0 || s2 <= 0 {
+		fmt.Println("Invalid parameter value.")
+		os.Exit(84)
+	}
 	sum_first := s1
 	sum_snd := s2
 	first_turn := false
@@ -38,23 +42,12 @@ func ComputeJoinPoint(s1 int, s2 int) int {
 		first_turn = true
 		if sum_first < 0 || sum_first >= 20000000 {
 			fmt.Println("Error :The join point exceed 20000000")
+			os.Exit(84)
 		}
 	}
 	if sum_first >= 0 || sum_first < 20000000 {
 		fmt.Println("The joining point of these numbers is", sum_first)
+		os.Exit(0)
 	}
 	return sum_first
-}
-
-func main() {
-	if len(os.Args) != 3 {
-		os.Exit(84)
-	}
-	first_nb, err := strconv.Atoi(os.Args[1])
-	snd_nb, err := strconv.Atoi(os.Args[2])
-	if first_nb >= 20000000 || snd_nb >= 20000000 || first_nb <= 0 || snd_nb <= 0 {
-		os.Exit(84)
-	}
-	ComputeJoinPoint(first_nb, snd_nb)
-	_ = err
 }
